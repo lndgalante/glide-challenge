@@ -57,19 +57,19 @@ Good luck! Show us that youʼre good and weʼll be more than happy to welcome yo
 
 ```typescript
 type Employee = {
-  first: string
-  last: string
-  id: number
-  manager: number
-  department: number
-  office: number | null
-}
+  first: string;
+  last: string;
+  id: number;
+  manager: number;
+  department: number;
+  office: number | null;
+};
 ```
 
 - Employees
 
 ```typescript
-type Employees = Employee[]
+type Employees = Employee[];
 ```
 
 ### Endpoints
