@@ -1,5 +1,7 @@
 # Glide Challenge
 
+---
+
 ## Big Corp chart
 
 ### Overview
@@ -34,13 +36,48 @@ Yes, thatʼs all the instructions weʼre going to give you, the rest is entirely
 
 ### What is important / evaluation criteria
 
-- How well your solution solves the problem, including performance (try not to make many requests to the api, as less as possible).
-  Will it work with more than a couple of dozens employees?
+✅ How well your solution solves the problem, including performance (try not to make many requests to the api, as less as possible).
+Will it work with more than a couple of dozens employees?
 
-* Sense of design
+✅ Sense of design
 
-- The architecture of your solution, the overall picture.
+✅ The architecture of your solution, the overall picture.
 
-* Is it easy to install and run.
+✅ Is it easy to install and run.
 
 Good luck! Show us that youʼre good and weʼll be more than happy to welcome you to our team!
+
+---
+
+## Documentation Process
+
+### Schemas
+
+- Employee
+
+```typescript
+type Employee = {
+  first: string
+  last: string
+  id: number
+  manager: number
+  department: number
+  office: number | null
+}
+```
+
+- Employees
+
+```typescript
+type Employees = Employee[]
+```
+
+### Endpoints
+
+- Employees: [/EmployeesChart-Api]()
+
+* Pagination: [/EmployeesChart-Api?offset=&limit=]()
+
+- Employees by ids: [/EmployeesChart-Api?id=]()
+
+* Employees by manager id: [/EmployeesChart-Api?manager=]()
