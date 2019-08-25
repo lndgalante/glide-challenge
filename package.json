@@ -18,6 +18,9 @@
     "prop-types": "^15.7.2",
     "@lndgalante/r-orgchart": "^0.3.2"
   },
+  "resolutions": {
+    "webpack": "4.39.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
