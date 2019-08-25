@@ -1,7 +1,6 @@
 import { call, put, delay, select, takeLatest, takeEvery } from 'redux-saga/effects';
 import { push, LOCATION_CHANGE } from 'connected-react-router';
 import { matchPath } from 'react-router-dom';
-import delve from 'dlv';
 
 /* Actions */
 import {

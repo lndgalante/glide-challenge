@@ -53,7 +53,7 @@ Good luck! Show us that youʼre good and weʼll be more than happy to welcome yo
 
 ### Schemas
 
-- Employee
+- Employee object
 
 ```typescript
 type Employee = {
@@ -66,10 +66,28 @@ type Employee = {
 };
 ```
 
-- Employees
+- Employees array
 
 ```typescript
 type Employees = Employee[];
+```
+
+- Employee record
+
+```typescript
+type EmployeeRecord = {
+  [key: string]: Employee;
+};
+```
+
+### Redux Store Schema
+
+```typescript
+type Store = {
+  data: EmployeeRecord;
+  pagination: { offset: number; limit: number };
+  loading: { managerEmployees: boolean; employee: boolean };
+};
 ```
 
 ### Endpoints
@@ -81,3 +99,20 @@ type Employees = Employee[];
 - Employees by ids: [/EmployeesChart-Api?id=]()
 
 * Employees by manager id: [/EmployeesChart-Api?manager=]()
+
+### Client Routes
+
+- Employees: [/employees]()
+
+* Employee: [/employees/:employeeId]()
+
+### Custom Libraries
+
+- Organizational Chart [@lndgalante/r-orgchart](https://github.com/lndgalante/r-orgchart)
+  Almost all React libraries to display chart receives an array of objects were each object can have optionally a children array of object that can optionally also have a children array and so on.
+  Since this data structure it's complex and painful to transform to I began researching and found [r-orgchart](https://github.com/kodbiro/r-orgchart) were we need only an array of objects with `title`, `id` and `ParentId` as keys but this library wasn't avaiable to disable edition mode so when you click on a node you can edit the text inside that node and also didn't support the ability to click on a node and execute a function.
+  So I forked the library and add this features that are 2 props: `disableEditNodes` to disable edition on all nodes and `onNodeClick` that through a callback will return the node `id` that it's very helpful to make an action later with that node.
+
+### Nice to have
+
+- [ ] Button to display all the company employees at once
