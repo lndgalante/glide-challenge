@@ -17,23 +17,15 @@ const Component = () => {
 
   useEffect(() => {
     dispatch(getEmployeesRequest(MANAGERS.CEO));
-  }, []);
+  }, [dispatch]);
 
   const getSubEmployees = id => dispatch(getEmployeesRequest(id));
-
-  const parsedEmployees = Object.entries(employees).map(([key, value]) => value);
 
   return (
     <div>
       <h1>Big Corp Chart</h1>
       <Spin spinning={loaders.employees}>
-        <Rorgchart
-          editonly={true}
-          disableRootEdit
-          nodeClassName='WHOA'
-          data={parsedEmployees}
-          addNewChild={getSubEmployees}
-        />
+        <Rorgchart editonly={true} disableRootEdit data={employees} addNewChild={getSubEmployees} />
       </Spin>
     </div>
   );

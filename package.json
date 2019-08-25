@@ -7,6 +7,7 @@
     "connected-react-router": "^6.5.2",
     "dlv": "^1.1.3",
     "history": "^4.9.0",
+    "prop-types": "^15.7.2",
     "r-orgchart": "^0.0.6",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

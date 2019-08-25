@@ -90,3 +90,12 @@ a:focus {
 .org-node-btns svg {
   cursor: pointer;
 }
+
+.org-chart-container table .node-box .org-node-btns .icon {
+  font-size: 24px;
+}
+
+.org-chart-container table .node-box .org-node-btns .icon.fa-pencil-alt,
+.org-chart-container table .node-box .org-node-btns .icon.fa-trash-alt {
+  display: none;
+}

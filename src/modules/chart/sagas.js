@@ -1,21 +1,33 @@
-import { call, put, delay, takeLatest } from 'redux-saga/effects';
+import { call, put, delay, select, takeLatest } from 'redux-saga/effects';
 
 /* Actions */
 import { getEmployeesRequest, getEmployeesSuccess, getEmployeesLoading } from './actions';
+/* Selectors */
+import { getChartEmployee } from './selectors';
 /* Helpers */
 import api from '../../lib/api';
+import { openNotificationWithIcon } from '../../lib/utils';
 import { parseEmployeesById } from './utils';
 
 /* Workers */
 function* getEmployees(action) {
+  const { employeeId } = action.payload;
+  const employee = yield select(state => getChartEmployee(state, employeeId));
+
   try {
     yield delay(1000);
-
-    const { employeeId } = action.payload;
     yield put(getEmployeesLoading());
+
     const employees = yield call(() => api.fetchEmployeesByManagerId(employeeId));
+
+    if (employees.length === 0) {
+      openNotificationWithIcon('info', `${employee.first} ${employee.last} no tiene empleados a cargo`);
+    }
+
     yield put(getEmployeesSuccess(parseEmployeesById(employees)));
-  } catch (error) {}
+  } catch (error) {
+    openNotificationWithIcon('error', `No pudimos conseguir los empleados de ${employee.first} ${employee.last}`);
+  }
 }
 
 /* Watchers */
