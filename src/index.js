@@ -5,7 +5,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 /* Styles */
-import './index.css';
 import 'antd/dist/antd.css';
 /* Pages */
 import Chart from './pages/Chart';

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spin } from 'antd';
-import Rorgchart from 'r-orgchart';
 
+/* Components */
+import OrganizationChart from '../OrganizationChart';
 /* Actions */
 import { getEmployeesRequest } from '../../modules/chart/actions';
 /* Selectors */
@@ -25,7 +26,7 @@ const Component = () => {
     <div>
       <h1>Big Corp Chart</h1>
       <Spin spinning={loaders.employees}>
-        <Rorgchart editonly={true} disableRootEdit data={employees} addNewChild={getSubEmployees} />
+        <OrganizationChart data={employees} onAddNewChild={getSubEmployees} />
       </Spin>
     </div>
   );

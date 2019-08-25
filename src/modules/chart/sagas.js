@@ -16,17 +16,17 @@ function* getEmployees(action) {
 
   try {
     yield delay(1000);
-    yield put(getEmployeesLoading());
 
+    yield put(getEmployeesLoading());
     const employees = yield call(() => api.fetchEmployeesByManagerId(employeeId));
 
     if (employees.length === 0) {
-      openNotificationWithIcon('info', `${employee.first} ${employee.last} no tiene empleados a cargo`);
+      openNotificationWithIcon('info', `${employee.first} ${employee.last}`, 'No posee empleados a cargo');
     }
 
     yield put(getEmployeesSuccess(parseEmployeesById(employees)));
   } catch (error) {
-    openNotificationWithIcon('error', `No pudimos conseguir los empleados de ${employee.first} ${employee.last}`);
+    openNotificationWithIcon('error', `${employee.first} ${employee.last}`, 'No pudimos conseguir sus empleados');
   }
 }
 
