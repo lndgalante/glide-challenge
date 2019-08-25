@@ -13,6 +13,12 @@ const api = {
 
     return data;
   },
+  fetchEmployeeById: async employeeId => {
+    const response = await fetch(`${BASE_URL}?id=${employeeId}`);
+    const data = await response.json();
+
+    return data;
+  },
 };
 
 export default api;

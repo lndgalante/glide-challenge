@@ -7,7 +7,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 /* Styles */
 import 'antd/dist/antd.css';
 /* Pages */
-import Chart from './pages/Chart';
+import Employees from './pages/Employees';
 /* Redux */
 import { configureStore, history } from './store';
 /* Consntants */
@@ -15,17 +15,18 @@ import { ROUTES } from './lib/constants';
 
 const store = configureStore();
 
-const Challenge = () => {
+const App = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route exact path={ROUTES.chart} render={Chart} />
-          <Route exact path='*' render={() => <Redirect to={ROUTES.chart} />} />
+          <Route exact path={ROUTES.employees} render={Employees} />
+          <Route exact path={ROUTES.employeeId()} render={Employees} />
+          <Route exact path='*' render={() => <Redirect to={ROUTES.employees} />} />
         </Switch>
       </ConnectedRouter>
     </Provider>
   );
 };
 
-ReactDOM.render(<Challenge />, document.querySelector('#root'));
+ReactDOM.render(<App />, document.querySelector('#root'));

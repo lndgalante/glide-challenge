@@ -1,12 +1,17 @@
 import React from 'react';
-import RorgChart from 'r-orgchart';
+import RorgChart from '@lndgalante/r-orgchart';
 import PropTypes from 'prop-types';
 
-/* Styles */
-import './index.css';
-
-const OrganizationChart = ({ data, onAddNewChild }) => {
-  return <RorgChart disableRootEdit data={data} addNewChild={onAddNewChild} />;
+const OrganizationChart = ({ isNodeEditionDisabled, isRootEditionDisabled, data, onAddNewChild, onNodeClick }) => {
+  return (
+    <RorgChart
+      data={data}
+      disableRootEdit={isRootEditionDisabled}
+      disableEditNodes={isNodeEditionDisabled}
+      onNodeClick={onNodeClick}
+      addNewChild={onAddNewChild}
+    />
+  );
 };
 
 OrganizationChart.propTypes = {
@@ -17,6 +22,15 @@ OrganizationChart.propTypes = {
       ParentId: PropTypes.number,
     })
   ).isRequired,
+  onNodeClick: PropTypes.func.isRequired,
+  onAddNewChild: PropTypes.func.isRequired,
+  isRootEditionDisabled: PropTypes.bool,
+  isNodeEditionDisabled: PropTypes.bool,
+};
+
+OrganizationChart.defaultProps = {
+  isRootEditionDisabled: true,
+  isNodeEditionDisabled: true,
 };
 
 export default OrganizationChart;

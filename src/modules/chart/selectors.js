@@ -8,6 +8,7 @@ export const getChartEmployees = state => {
 export const getChartEmployee = (state, employeeId) => {
   return delve(state, ['chart', 'data', employeeId]);
 };
+
 export const getChartLoading = state => {
   return delve(state, 'chart.loading');
 };

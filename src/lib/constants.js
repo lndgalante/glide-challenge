@@ -1,6 +1,6 @@
 const ROUTES = {
-  chart: '/chart',
-  chartId: id => (id ? `/chart/${id}` : `/chart/:chartId`),
+  employees: '/employees',
+  employeeId: id => (id ? `/employees/${id}` : `/employees/:employeeId`),
 };
 
 const MANAGERS = {

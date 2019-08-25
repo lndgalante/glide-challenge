@@ -1,9 +1,14 @@
 import { createAction } from 'redux-actions';
 
 /* Employees */
-export const getEmployeesRequest = createAction('GET_EMPLOYEES_REQUEST', employeeId => ({ employeeId }));
-export const getEmployeesLoading = createAction('GET_EMPLOYEES_LOADING');
-export const getEmployeesSuccess = createAction('GET_EMPLOYEES_SUCCESS', employees => ({ employees }));
+export const getManagerEmployeesRequest = createAction('GET_MANAGER_EMPLOYEES_REQUEST', managerId => ({ managerId }));
+export const getManagerEmployeesLoading = createAction('GET_MANAGER_EMPLOYEES_LOADING');
+export const getManagerEmployeesSuccess = createAction('GET_MANAGER_EMPLOYEES_SUCCESS', employees => ({ employees }));
+
+/* Employee */
+export const getEmployeeRequest = createAction('GET_EMPLOYEE_REQUEST', employeeId => ({ employeeId }));
+export const getEmployeeLoading = createAction('GET_EMPLOYEE_LOADING');
+export const getEmployeeSuccess = createAction('GET_EMPLOYEE_SUCCESS', employees => ({ employees }));
 
 /* Pagination */
 export const setPaginationLimit = createAction('SET_PAGINATION_LIMIT', limit => ({ limit }));

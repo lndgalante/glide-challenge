@@ -1,3 +1,6 @@
+/* Constants */
+import { MANAGERS } from '../../lib/constants';
+
 const parseEmployeesById = employees => {
   return employees.reduce(
     (acc, employee) => ({
@@ -5,15 +8,11 @@ const parseEmployeesById = employees => {
       [employee.id]: {
         ...employee,
         title: `${employee.first} ${employee.last}`,
-        ParentId: employee.manager === 0 ? null : employee.manager,
+        ParentId: employee.manager === MANAGERS.CEO ? null : employee.manager,
       },
     }),
     {}
   );
 };
 
-const getSubEmployeesById = (employees, employeeId) => {
-  return employees.filter(employee => employee.manager !== employeeId).map(({ id }) => id);
-};
-
-export { parseEmployeesById, getSubEmployeesById };
+export { parseEmployeesById };
