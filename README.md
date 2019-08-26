@@ -114,9 +114,11 @@ type Store = {
   But this library wasn't avaiable to disable edition mode so when you click on a node you can edit the text inside that node and also didn't support the ability to click on a node and execute a function.
   So in order to solve this I forked the library and add this features that are 2 props: `disableEditNodes` to disable edition on all nodes and `onNodeClick` that through a callback will return the node `id` that it's very helpful to make an action later with that node.
 
-### Nice to have
+### Features
 
-- [x] Button to display all the company employees at once
+- [x] Navbar button will display all the company employees at once
+- [x] Click on an employee "+" button will display all dependant employees
+- [x] Click on an employee name will display more info about that particular employee
 
 ### Deploy
 
