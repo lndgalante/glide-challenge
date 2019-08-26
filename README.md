@@ -116,5 +116,8 @@ type Store = {
 
 ### Nice to have
 
-- [ ] Button to display all the company employees at once
-- [ ] Search input to find an employee by it's id
+- [x] Button to display all the company employees at once
+
+### Deploy
+
+The challenge it's hosted on ZEIT Now: [Glide Challenge](https://glide-challenge.now.sh)
