@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
+import PropTypes from 'prop-types';
 
 /* Components */
 import { Container } from './styled';
@@ -12,6 +13,11 @@ const Navbar = ({ isLoading, onGetAllEmployees }) => {
       </Button>
     </Container>
   );
+};
+
+Navbar.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  onGetAllEmployees: PropTypes.func.isRequired,
 };
 
 export default Navbar;

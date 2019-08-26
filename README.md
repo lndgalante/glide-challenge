@@ -86,7 +86,7 @@ type EmployeeRecord = {
 type Store = {
   data: EmployeeRecord;
   pagination: { offset: number; limit: number };
-  loading: { managerEmployees: boolean; employee: boolean };
+  loading: { managerEmployees: boolean; employee: boolean; allEmployees: boolean };
 };
 ```
 

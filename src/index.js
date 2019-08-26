@@ -15,18 +15,16 @@ import { ROUTES } from './lib/constants';
 
 const store = configureStore();
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Switch>
-          <Route exact path={ROUTES.employees} render={Employees} />
-          <Route exact path={ROUTES.employeeId()} render={Employees} />
-          <Route exact path='*' render={() => <Redirect to={ROUTES.employees} />} />
-        </Switch>
-      </ConnectedRouter>
-    </Provider>
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route exact path={ROUTES.employees} render={Employees} />
+        <Route exact path={ROUTES.employeeId()} render={Employees} />
+        <Route exact path='*' render={() => <Redirect to={ROUTES.employees} />} />
+      </Switch>
+    </ConnectedRouter>
+  </Provider>
+);
 
 ReactDOM.render(<App />, document.querySelector('#root'));

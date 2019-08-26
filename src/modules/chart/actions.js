@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-/* Employees */
+/* Manager Employees */
 export const getManagerEmployeesRequest = createAction('GET_MANAGER_EMPLOYEES_REQUEST', managerId => ({ managerId }));
 export const getManagerEmployeesLoading = createAction('GET_MANAGER_EMPLOYEES_LOADING');
 export const getManagerEmployeesSuccess = createAction('GET_MANAGER_EMPLOYEES_SUCCESS', employees => ({ employees }));

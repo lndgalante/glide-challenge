@@ -13,7 +13,7 @@ const Employees = ({ match }) => {
 
   return (
     <Container>
-      <Navbar></Navbar>
+      <Navbar />
       <Chart />
       {employeeId && <SideDrawer employeeId={employeeId} />}
     </Container>

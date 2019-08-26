@@ -5,11 +5,7 @@ import { connectRouter } from 'connected-react-router';
 import chart from '../modules/chart/reducer';
 
 const createRootReducer = history => {
-  const reducers = {
-    router: connectRouter(history),
-    chart,
-  };
-
+  const reducers = { router: connectRouter(history), chart };
   return combineReducers(reducers);
 };
 
