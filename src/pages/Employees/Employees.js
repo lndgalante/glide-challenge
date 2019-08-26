@@ -3,17 +3,20 @@ import delve from 'dlv';
 import PropTypes from 'prop-types';
 
 /* Actions */
-import Chart from '../components/Chart';
-import SideDrawer from '../components/SideDrawer';
+import Container from './styled';
+import Chart from '../../components/Chart';
+import Navbar from '../../components/Navbar';
+import SideDrawer from '../../components/SideDrawer';
 
 const Employees = ({ match }) => {
   const employeeId = delve(match, 'params.employeeId');
 
   return (
-    <main>
+    <Container>
+      <Navbar></Navbar>
       <Chart />
       {employeeId && <SideDrawer employeeId={employeeId} />}
-    </main>
+    </Container>
   );
 };
 

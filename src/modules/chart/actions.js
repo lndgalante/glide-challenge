@@ -10,6 +10,11 @@ export const getEmployeeRequest = createAction('GET_EMPLOYEE_REQUEST', employeeI
 export const getEmployeeLoading = createAction('GET_EMPLOYEE_LOADING');
 export const getEmployeeSuccess = createAction('GET_EMPLOYEE_SUCCESS', employees => ({ employees }));
 
+/* All Employees */
+export const getAllEmployeesRequest = createAction('GET_ALL_EMPLOYEE_REQUEST');
+export const getAllEmployeesLoading = createAction('GET_ALL_EMPLOYEE_LOADING');
+export const getAllEmployeesSuccess = createAction('GET_ALL_EMPLOYEE_SUCCESS', employees => ({ employees }));
+
 /* Pagination */
 export const setPaginationLimit = createAction('SET_PAGINATION_LIMIT', limit => ({ limit }));
 export const setPaginationOffset = createAction('SET_PAGINATION_OFFSET', offset => ({ offset }));

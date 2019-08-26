@@ -10,6 +10,9 @@ import {
   getEmployeeRequest,
   getEmployeeLoading,
   getEmployeeSuccess,
+  getAllEmployeesRequest,
+  getAllEmployeesLoading,
+  getAllEmployeesSuccess,
 } from './actions';
 /* Selectors */
 import { getChartEmployee } from './selectors';
@@ -30,7 +33,6 @@ function* getManagerEmployees(action) {
     const employees = yield call(() => api.fetchEmployeesByManagerId(managerId));
 
     yield delay(400);
-
     if (employees.length === 0) {
       openNotificationWithIcon('info', `${employee.first} ${employee.last}`, 'No posee empleados a cargo');
     }
@@ -51,11 +53,23 @@ function* getEmployee(action) {
     const employees = yield call(() => api.fetchEmployeeById(employeeId));
 
     yield delay(400);
-
     yield put(getEmployeeSuccess(parseEmployeesById(employees)));
   } catch (error) {
     yield put(push(ROUTES.employees));
     openNotificationWithIcon('error', `Empleado ${employeeId}`, 'No pudimos conseguir sus datos');
+  }
+}
+
+function* getAllEmployees() {
+  try {
+    yield put(getAllEmployeesLoading());
+
+    const employees = yield call(() => api.fetchEmployees({ offset: 0, limit: Number.MAX_SAFE_INTEGER }));
+
+    yield delay(400);
+    yield put(getAllEmployeesSuccess(parseEmployeesById(employees)));
+  } catch (error) {
+    openNotificationWithIcon('error', `Empleados`, 'No pudimos conseguir todos los empleados');
   }
 }
 
@@ -72,13 +86,14 @@ function* redirectToEmployeesFromEmployeeId(action) {
       if (!employee) yield put(push(ROUTES.employees));
     }
   } catch (err) {
-    openNotificationWithIcon('error', 'Error in redirectToEmployeesFromEmployeeId generator', err.message);
+    console.error('function*redirectToEmployeesFromEmployeeId', err);
   }
 }
 
 /* Watchers */
 function* chartSaga() {
   yield takeLatest(getEmployeeRequest, getEmployee);
+  yield takeLatest(getAllEmployeesRequest, getAllEmployees);
   yield takeLatest(getManagerEmployeesRequest, getManagerEmployees);
   yield takeEvery(LOCATION_CHANGE, redirectToEmployeesFromEmployeeId);
 }

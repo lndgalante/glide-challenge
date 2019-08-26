@@ -8,13 +8,15 @@ import {
   getEmployeeSuccess,
   setPaginationLimit,
   setPaginationOffset,
+  getAllEmployeesLoading,
+  getAllEmployeesSuccess,
 } from './actions';
 
 /* Initial State */
 const INITIAL_STATE = {
   data: {},
   pagination: { offset: 0, limit: 1 },
-  loading: { managerEmployees: false, employee: false },
+  loading: { managerEmployees: false, employee: false, allEmployees: false },
 };
 
 const chartReducer = handleActions(
@@ -46,6 +48,21 @@ const chartReducer = handleActions(
         ...state,
         data: { ...state.data, ...employees },
         loading: { ...state.loading, employee: false },
+      };
+    },
+
+    /* All Employees */
+    [getAllEmployeesLoading]: (state, action) => ({
+      ...state,
+      loading: { ...state.loading, allEmployees: true },
+    }),
+    [getAllEmployeesSuccess]: (state, action) => {
+      const { employees } = action.payload;
+
+      return {
+        ...state,
+        data: { ...state.data, ...employees },
+        loading: { ...state.loading, allEmployees: false },
       };
     },
 
