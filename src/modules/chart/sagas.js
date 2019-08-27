@@ -19,7 +19,7 @@ import {
 import { getChartEmployee } from './selectors';
 /* Helpers */
 import api from '../../lib/api';
-import { parseEmployeesById } from './utils';
+import { parseEmployeesById, parseEmployeesWithHasChildrens } from './utils';
 import { openNotificationWithIcon } from '../../lib/utils';
 /* Constants */
 import { ROUTES } from '../../lib/constants';
@@ -62,13 +62,9 @@ function* getEmployee(action) {
 function* getAllEmployees() {
   try {
     yield put(getAllEmployeesLoading());
-
     const employees = yield call(() => api.fetchEmployees({ offset: 0, limit: Number.MAX_SAFE_INTEGER }));
-    const employeesWithHasChildren = employees.map(employee => {
-      const hasChildrens = employees.some(emp => emp.manager === employee.id);
-      return { ...employee, hasChildrens };
-    });
 
+    const employeesWithHasChildren = parseEmployeesWithHasChildrens(employees);
     yield put(getAllEmployeesSuccess(parseEmployeesById(employeesWithHasChildren)));
   } catch (error) {
     openNotificationWithIcon('error', `Empleados`, 'No pudimos conseguir todos los empleados');

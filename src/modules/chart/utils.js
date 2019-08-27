@@ -16,4 +16,11 @@ const parseEmployeesById = employees => {
   );
 };
 
-export { parseEmployeesById };
+const parseEmployeesWithHasChildrens = employees => {
+  return employees.map(employee => {
+    const hasChildrens = employees.some(emp => emp.manager === employee.id);
+    return { ...employee, hasChildrens };
+  });
+};
+
+export { parseEmployeesById, parseEmployeesWithHasChildrens };
