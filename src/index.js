@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-/* Styles */
-import 'antd/dist/antd.css';
 /* Pages */
 import Employees from './pages/Employees';
 /* Redux */

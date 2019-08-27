@@ -2,7 +2,7 @@ import React from 'react';
 import delve from 'dlv';
 import PropTypes from 'prop-types';
 
-/* Actions */
+/* Components */
 import Container from './styled';
 import Chart from '../../components/Chart';
 import Navbar from '../../components/Navbar';

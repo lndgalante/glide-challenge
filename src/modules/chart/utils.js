@@ -1,3 +1,5 @@
+import { notification } from 'antd';
+
 /* Constants */
 import { MANAGERS } from '../../lib/constants';
 
@@ -23,4 +25,8 @@ const parseEmployeesWithHasChildrens = employees => {
   });
 };
 
-export { parseEmployeesById, parseEmployeesWithHasChildrens };
+const openNotificationWithIcon = (type, message, description) => {
+  notification[type]({ message, description });
+};
+
+export { parseEmployeesById, parseEmployeesWithHasChildrens, openNotificationWithIcon };

@@ -19,8 +19,7 @@ import {
 import { getChartEmployee } from './selectors';
 /* Helpers */
 import api from '../../lib/api';
-import { parseEmployeesById, parseEmployeesWithHasChildrens } from './utils';
-import { openNotificationWithIcon } from '../../lib/utils';
+import { parseEmployeesById, parseEmployeesWithHasChildrens, openNotificationWithIcon } from './utils';
 /* Constants */
 import { ROUTES } from '../../lib/constants';
 
