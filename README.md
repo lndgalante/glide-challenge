@@ -119,7 +119,15 @@ type Store = {
 - [x] Navbar button will display all the company employees at once
 - [x] Click on an employee "+" button will display all dependant employees
 - [x] Click on an employee name will display more info about that particular employee
+- [x] If employee doesn't have any dependant employees will be displayed with a dashed border
 
 ### Deploy
 
 The challenge it's hosted on ZEIT Now: [Glide Challenge](https://glide-challenge.now.sh)
+
+### Audits
+
+In order to improve the App I used Lighthouse to audit the React app.
+On desktop without throttling we get a perfect score 100/100 in all areas.
+
+<img alt="Lighthouse" src="https://i.imgur.com/dMdCKn3.png" width="500">
