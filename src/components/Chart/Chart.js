@@ -3,13 +3,21 @@ import { Spin } from 'antd';
 import PropTypes from 'prop-types';
 
 /* Components */
+import { Container, StyledTitle } from './styled';
 import OrganizationChart from '../OrganizationChart';
 
 const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) => {
   return (
-    <Spin spinning={isLoading}>
-      <OrganizationChart data={employees} onAddNewChild={onGetManagerEmployees} onNodeClick={onGetEmployee} />
-    </Spin>
+    <Container>
+      <StyledTitle level={2}>
+        Organization
+        <br />
+        chart
+      </StyledTitle>
+      <Spin spinning={isLoading}>
+        <OrganizationChart data={employees} onAddNewChild={onGetManagerEmployees} onNodeClick={onGetEmployee} />
+      </Spin>
+    </Container>
   );
 };
 

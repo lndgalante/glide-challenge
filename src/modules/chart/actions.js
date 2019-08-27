@@ -15,6 +15,9 @@ export const getAllEmployeesRequest = createAction('GET_ALL_EMPLOYEE_REQUEST');
 export const getAllEmployeesLoading = createAction('GET_ALL_EMPLOYEE_LOADING');
 export const getAllEmployeesSuccess = createAction('GET_ALL_EMPLOYEE_SUCCESS', employees => ({ employees }));
 
+/* Employee Childrens */
+export const setEmployeeNoSubemployees = createAction('SET_EMPLOYEE_NO_SUBEMPLOYEES', employeeId => ({ employeeId }));
+
 /* Pagination */
 export const setPaginationLimit = createAction('SET_PAGINATION_LIMIT', limit => ({ limit }));
 export const setPaginationOffset = createAction('SET_PAGINATION_OFFSET', offset => ({ offset }));

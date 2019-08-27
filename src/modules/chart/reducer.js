@@ -10,6 +10,7 @@ import {
   setPaginationOffset,
   getAllEmployeesLoading,
   getAllEmployeesSuccess,
+  setEmployeeNoSubemployees,
 } from './actions';
 
 /* Initial State */
@@ -63,6 +64,17 @@ const chartReducer = handleActions(
         ...state,
         data: { ...state.data, ...employees },
         loading: { ...state.loading, allEmployees: false },
+      };
+    },
+
+    /* Employee No Subemployees */
+    [setEmployeeNoSubemployees]: (state, action) => {
+      const { employeeId } = action.payload;
+
+      return {
+        ...state,
+        data: { ...state.data, [employeeId]: { ...state.data[employeeId], hasChildrens: false } },
+        loading: { ...state.loading, employee: false },
       };
     },
 

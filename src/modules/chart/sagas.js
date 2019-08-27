@@ -1,4 +1,4 @@
-import { call, put, delay, select, takeLatest, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects';
 import { push, LOCATION_CHANGE } from 'connected-react-router';
 import { matchPath } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import {
   getAllEmployeesRequest,
   getAllEmployeesLoading,
   getAllEmployeesSuccess,
+  setEmployeeNoSubemployees,
 } from './actions';
 /* Selectors */
 import { getChartEmployee } from './selectors';
@@ -32,8 +33,8 @@ function* getManagerEmployees(action) {
     yield put(getManagerEmployeesLoading());
     const employees = yield call(() => api.fetchEmployeesByManagerId(managerId));
 
-    yield delay(400);
     if (employees.length === 0) {
+      yield put(setEmployeeNoSubemployees(employee.id));
       openNotificationWithIcon('info', `${employee.first} ${employee.last}`, 'No posee empleados a cargo');
     }
 
@@ -51,8 +52,6 @@ function* getEmployee(action) {
     yield put(push(ROUTES.employeeId(employeeId)));
 
     const employees = yield call(() => api.fetchEmployeeById(employeeId));
-
-    yield delay(400);
     yield put(getEmployeeSuccess(parseEmployeesById(employees)));
   } catch (error) {
     yield put(push(ROUTES.employees));
@@ -65,9 +64,12 @@ function* getAllEmployees() {
     yield put(getAllEmployeesLoading());
 
     const employees = yield call(() => api.fetchEmployees({ offset: 0, limit: Number.MAX_SAFE_INTEGER }));
+    const employeesWithHasChildren = employees.map(employee => {
+      const hasChildrens = employees.some(emp => emp.manager === employee.id);
+      return { ...employee, hasChildrens };
+    });
 
-    yield delay(400);
-    yield put(getAllEmployeesSuccess(parseEmployeesById(employees)));
+    yield put(getAllEmployeesSuccess(parseEmployeesById(employeesWithHasChildren)));
   } catch (error) {
     openNotificationWithIcon('error', `Empleados`, 'No pudimos conseguir todos los empleados');
   }
