@@ -10,9 +10,12 @@ import 'antd/dist/antd.css';
 import Employees from './pages/Employees';
 /* Redux */
 import { configureStore, history } from './store';
+/* Helpers */
+import * as serviceWorker from './lib/serviceWorker';
 /* Consntants */
 import { ROUTES } from './lib/constants';
 
+serviceWorker.register();
 const store = configureStore();
 
 const App = () => (
