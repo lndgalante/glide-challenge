@@ -7,4 +7,11 @@ const MANAGERS = {
   CEO: 0,
 };
 
-export { ROUTES, MANAGERS };
+const ICONS = {
+  info: 'info',
+  error: 'error',
+  success: 'success',
+  warning: 'warning',
+};
+
+export { ROUTES, MANAGERS, ICONS };

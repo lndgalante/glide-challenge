@@ -11,6 +11,9 @@ import {
   getAllEmployeesLoading,
   getAllEmployeesSuccess,
   setEmployeeNoSubemployees,
+  getManagerEmployeesFailure,
+  getEmployeeFailure,
+  getAllEmployeesFailure,
 } from './actions';
 
 /* Initial State */
@@ -36,6 +39,10 @@ const chartReducer = handleActions(
         loading: { ...state.loading, managerEmployees: false },
       };
     },
+    [getManagerEmployeesFailure]: (state, action) => ({
+      ...state,
+      loading: { ...state.loading, managerEmployees: false },
+    }),
 
     /* Employee */
     [getEmployeeLoading]: (state, action) => ({
@@ -51,6 +58,10 @@ const chartReducer = handleActions(
         loading: { ...state.loading, employee: false },
       };
     },
+    [getEmployeeFailure]: (state, action) => ({
+      ...state,
+      loading: { ...state.loading, employee: false },
+    }),
 
     /* All Employees */
     [getAllEmployeesLoading]: (state, action) => ({
@@ -66,6 +77,10 @@ const chartReducer = handleActions(
         loading: { ...state.loading, allEmployees: false },
       };
     },
+    [getAllEmployeesFailure]: (state, action) => ({
+      ...state,
+      loading: { ...state.loading, allEmployees: false },
+    }),
 
     /* Employee No Subemployees */
     [setEmployeeNoSubemployees]: (state, action) => {

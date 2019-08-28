@@ -7,12 +7,15 @@ import {
   getManagerEmployeesRequest,
   getManagerEmployeesSuccess,
   getManagerEmployeesLoading,
+  getManagerEmployeesFailure,
   getEmployeeRequest,
   getEmployeeLoading,
   getEmployeeSuccess,
+  getEmployeeFailure,
   getAllEmployeesRequest,
   getAllEmployeesLoading,
   getAllEmployeesSuccess,
+  getAllEmployeesFailure,
   setEmployeeNoSubemployees,
 } from './actions';
 /* Selectors */
@@ -21,7 +24,7 @@ import { getChartEmployee } from './selectors';
 import api from '../../lib/api';
 import { parseEmployeesById, parseEmployeesWithHasChildrens, openNotificationWithIcon } from './utils';
 /* Constants */
-import { ROUTES } from '../../lib/constants';
+import { ROUTES, ICONS } from '../../lib/constants';
 
 /* Workers */
 function* getManagerEmployees(action) {
@@ -34,17 +37,19 @@ function* getManagerEmployees(action) {
 
     if (employees.length === 0) {
       yield put(setEmployeeNoSubemployees(employee.id));
-      openNotificationWithIcon('info', `${employee.first} ${employee.last}`, 'No posee empleados a cargo');
+      openNotificationWithIcon(ICONS.info, `${employee.first} ${employee.last}`, 'Has no dependant employees');
     }
 
     yield put(getManagerEmployeesSuccess(parseEmployeesById(employees)));
   } catch (error) {
-    openNotificationWithIcon('error', `${employee.first} ${employee.last}`, 'No pudimos conseguir sus empleados');
+    yield put(getManagerEmployeesFailure());
+    openNotificationWithIcon(ICONS.error, `${employee.first} ${employee.last}`, 'We cannot get dependant employees');
   }
 }
 
 function* getEmployee(action) {
   const { employeeId } = action.payload;
+  const employee = yield select(state => getChartEmployee(state, employeeId));
 
   try {
     yield put(getEmployeeLoading());
@@ -53,8 +58,9 @@ function* getEmployee(action) {
     const employees = yield call(() => api.fetchEmployeeById(employeeId));
     yield put(getEmployeeSuccess(parseEmployeesById(employees)));
   } catch (error) {
+    yield put(getEmployeeFailure());
     yield put(push(ROUTES.employees));
-    openNotificationWithIcon('error', `Empleado ${employeeId}`, 'No pudimos conseguir sus datos');
+    openNotificationWithIcon(ICONS.error, `${employee.first} ${employee.last}`, `We couldn't get employee data`);
   }
 }
 
@@ -66,7 +72,8 @@ function* getAllEmployees() {
     const employeesWithHasChildren = parseEmployeesWithHasChildrens(employees);
     yield put(getAllEmployeesSuccess(parseEmployeesById(employeesWithHasChildren)));
   } catch (error) {
-    openNotificationWithIcon('error', `Empleados`, 'No pudimos conseguir todos los empleados');
+    yield put(getAllEmployeesFailure());
+    openNotificationWithIcon(ICONS.error, `Employees error`, `We couldn't get all employees data`);
   }
 }
 
@@ -83,7 +90,7 @@ function* redirectToEmployeesFromEmployeeId(action) {
       if (!employee) yield put(push(ROUTES.employees));
     }
   } catch (err) {
-    console.error('function*redirectToEmployeesFromEmployeeId', err);
+    console.error('Error in generator redirectToEmployeesFromEmployeeId', err);
   }
 }
 
