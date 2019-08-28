@@ -9,7 +9,7 @@ import OrganizationChart from '../OrganizationChart';
 const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) => {
   return (
     <Container>
-      <StyledTitle level={2}>
+      <StyledTitle>
         Organization
         <br />
         chart

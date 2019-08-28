@@ -11,16 +11,16 @@ import { getChartEmployees, getChartLoading } from '../../modules/chart/selector
 import { MANAGERS } from '../../lib/constants';
 
 const ChartContainer = () => {
-  const dispatch = useDispatch();
   const loaders = useSelector(getChartLoading);
   const employees = useSelector(getChartEmployees);
+
+  const dispatch = useDispatch();
+  const handleGetEmployee = id => dispatch(getEmployeeRequest(id));
+  const handleGetManagerEmployees = id => dispatch(getManagerEmployeesRequest(id));
 
   useEffect(() => {
     dispatch(getManagerEmployeesRequest(MANAGERS.CEO));
   }, [dispatch]);
-
-  const handleGetEmployee = id => dispatch(getEmployeeRequest(id));
-  const handleGetManagerEmployees = id => dispatch(getManagerEmployeesRequest(id));
 
   return (
     <Chart
