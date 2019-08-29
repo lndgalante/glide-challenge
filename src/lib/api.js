@@ -1,4 +1,7 @@
-const BASE_URL = `https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api`;
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? ''
+    : 'https://2jdg5klzl0.execute-api.us-west-1.amazonaws.com/default/EmployeesChart-Api';
 
 const api = {
   fetchEmployees: async ({ offset = 0, limit = 0 } = {}) => {
