@@ -40,7 +40,7 @@ function* getManagerEmployees(action) {
       openNotificationWithIcon(ICONS.info, `${employee.first} ${employee.last}`, 'Has no dependant employees');
     }
 
-    yield put(getManagerEmployeesSuccess(parseEmployeesById(employees)));
+    yield put(getManagerEmployeesSuccess(parseEmployeesById(employees), managerId));
   } catch (error) {
     yield put(getManagerEmployeesFailure());
     openNotificationWithIcon(ICONS.error, `${employee.first} ${employee.last}`, 'We cannot get dependant employees');
@@ -55,8 +55,8 @@ function* getEmployee(action) {
     yield put(getEmployeeLoading());
     yield put(push(ROUTES.employeeId(employeeId)));
 
-    const employees = yield call(() => api.fetchEmployeeById(employeeId));
-    yield put(getEmployeeSuccess(parseEmployeesById(employees)));
+    const [employee] = yield call(() => api.fetchEmployeeById(employeeId));
+    yield put(getEmployeeSuccess(employee));
   } catch (error) {
     yield put(getEmployeeFailure());
     yield put(push(ROUTES.employees));

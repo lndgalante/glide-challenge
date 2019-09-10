@@ -8,7 +8,9 @@ const parseEmployeesById = employees => {
     (acc, employee) => ({
       ...acc,
       [employee.id]: {
+        childrens: [],
         hasChildrens: true,
+        root: employee.manager === MANAGERS.CEO,
         title: `${employee.first} ${employee.last}`,
         ParentId: employee.manager === MANAGERS.CEO ? null : employee.manager,
         ...employee,

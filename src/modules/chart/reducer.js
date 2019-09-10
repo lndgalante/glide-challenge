@@ -15,6 +15,8 @@ import {
   getEmployeeFailure,
   getAllEmployeesFailure,
 } from './actions';
+/* Constants */
+import { MANAGERS } from '../../lib/constants';
 
 /* Initial State */
 const INITIAL_STATE = {
@@ -31,11 +33,20 @@ const chartReducer = handleActions(
       loading: { ...state.loading, managerEmployees: true },
     }),
     [getManagerEmployeesSuccess]: (state, action) => {
-      const { employees } = action.payload;
+      const { employees, managerId } = action.payload;
 
+      if (managerId === MANAGERS.CEO) {
+        return {
+          ...state,
+          data: { ...state.data, ...employees },
+          loading: { ...state.loading, managerEmployees: false },
+        };
+      }
+
+      const childrens = Object.keys(employees);
       return {
         ...state,
-        data: { ...state.data, ...employees },
+        data: { ...state.data, ...employees, [managerId]: { ...state.data[managerId], childrens } },
         loading: { ...state.loading, managerEmployees: false },
       };
     },
@@ -50,11 +61,11 @@ const chartReducer = handleActions(
       loading: { ...state.loading, employee: true },
     }),
     [getEmployeeSuccess]: (state, action) => {
-      const { employees } = action.payload;
+      const { employee } = action.payload;
 
       return {
         ...state,
-        data: { ...state.data, ...employees },
+        data: { ...state.data, [employee.id]: { ...state.data[employee.id], ...employee } },
         loading: { ...state.loading, employee: false },
       };
     },
