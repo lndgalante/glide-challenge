@@ -1,8 +1,7 @@
 import delve from 'dlv';
 
 export const getChartEmployees = state => {
-  const employees = delve(state, 'chart.data');
-  return Object.entries(employees).map(([key, value]) => value);
+  return delve(state, 'chart.data');
 };
 
 export const getChartEmployee = (state, employeeId) => {

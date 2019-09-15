@@ -3,17 +3,24 @@ import { Spin } from 'antd';
 import PropTypes from 'prop-types';
 
 /* Components */
-import { Container, StyledTitle } from './styled';
-// import OrganizationChart from '../OrganizationChart';
+import { Container, EmployeesContainer, StyledTitle } from './styled';
 /* Assets */
 import { ReactComponent as PlusIcon } from '../../assets/plus.svg';
+/* Constants */
+import { MANAGERS } from '../../lib/constants';
 
 const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) => {
+  let ceo = null;
+
+  for (const key in employees) {
+    if (employees[key].manager === MANAGERS.CEO) ceo = employees[key];
+  }
+
   const renderChildrens = employee => {
     return (
       employee.childrens &&
       employee.childrens.map(nextId => {
-        const findEmployee = employees.find(({ id }) => String(id) === nextId);
+        const findEmployee = employees[nextId];
 
         return (
           <li key={findEmployee.id}>
@@ -23,7 +30,11 @@ const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) =
                 <PlusIcon />
               </button>
             </div>
-            {findEmployee.childrens.length > 0 && <ul>{renderChildrens(findEmployee)}</ul>}
+            {findEmployee.childrens.length > 0 && (
+              <EmployeesContainer totalChildrens={employee.childrens.length} childrenWidth={0}>
+                {renderChildrens(findEmployee)}
+              </EmployeesContainer>
+            )}
           </li>
         );
       })
@@ -39,21 +50,17 @@ const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) =
       </StyledTitle>
 
       <Spin spinning={isLoading}>
-        {employees.map(employee => {
-          if (!employee.root) return null;
-
-          return (
-            <div>
-              <div className='box root'>
-                <p onClick={() => onGetEmployee(employee.id)}>{employee.title}</p>
-                <button onClick={() => onGetManagerEmployees(employee.id)}>
-                  <PlusIcon />
-                </button>
-              </div>
-              <ul>{renderChildrens(employee)}</ul>
+        {ceo && (
+          <div>
+            <div className='box root'>
+              <p onClick={() => onGetEmployee(ceo.id)}>{ceo.title}</p>
+              <button onClick={() => onGetManagerEmployees(ceo.id)}>
+                <PlusIcon />
+              </button>
             </div>
-          );
-        })}
+            <EmployeesContainer totalChildrens={ceo.childrens.length}>{renderChildrens(ceo)}</EmployeesContainer>
+          </div>
+        )}
 
         {/* <OrganizationChart data={employees} onAddNewChild={onGetManagerEmployees} onNodeClick={onGetEmployee} /> */}
       </Spin>
