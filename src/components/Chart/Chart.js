@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Spin } from 'antd';
 import PropTypes from 'prop-types';
 
@@ -10,11 +10,15 @@ import { ReactComponent as PlusIcon } from '../../assets/plus.svg';
 import { MANAGERS } from '../../lib/constants';
 
 const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) => {
-  let ceo = null;
+  const [ceo, setCeo] = useState(null);
 
-  for (const key in employees) {
-    if (employees[key].manager === MANAGERS.CEO) ceo = employees[key];
-  }
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
+    for (const key in employees) {
+      const employee = employees[key];
+      if (employee.manager === MANAGERS.CEO) setCeo(employee);
+    }
+  }, [employees]);
 
   const renderChildrens = employee => {
     return (
@@ -31,7 +35,7 @@ const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) =
               </button>
             </div>
             {findEmployee.childrens.length > 0 && (
-              <EmployeesContainer totalChildrens={employee.childrens.length} childrenWidth={0}>
+              <EmployeesContainer totalChildrens={employee.childrens.length}>
                 {renderChildrens(findEmployee)}
               </EmployeesContainer>
             )}
@@ -61,8 +65,6 @@ const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) =
             <EmployeesContainer totalChildrens={ceo.childrens.length}>{renderChildrens(ceo)}</EmployeesContainer>
           </div>
         )}
-
-        {/* <OrganizationChart data={employees} onAddNewChild={onGetManagerEmployees} onNodeClick={onGetEmployee} /> */}
       </Spin>
     </Container>
   );
