@@ -30,7 +30,10 @@ const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) =
           <li key={findEmployee.id}>
             <div className={`box ${findEmployee.hasChildrens ? 'has-childrens' : 'no-childrens'}`}>
               <p onClick={() => onGetEmployee(findEmployee.id)}>{findEmployee.title}</p>
-              <button onClick={() => onGetManagerEmployees(findEmployee.id)}>
+              <button
+                onClick={() => onGetManagerEmployees(findEmployee.id)}
+                aria-label={`Get ${findEmployee.title} dependant employees`}
+              >
                 <PlusIcon />
               </button>
             </div>
@@ -58,7 +61,7 @@ const Chart = ({ isLoading, employees, onGetManagerEmployees, onGetEmployee }) =
           <div>
             <div className='box root'>
               <p onClick={() => onGetEmployee(ceo.id)}>{ceo.title}</p>
-              <button onClick={() => onGetManagerEmployees(ceo.id)}>
+              <button onClick={() => onGetManagerEmployees(ceo.id)} aria-label='Get CEO dependant employees'>
                 <PlusIcon />
               </button>
             </div>
